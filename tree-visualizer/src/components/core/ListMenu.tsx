@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import Select,{} from "@mui/material/Select";
 
 export const ListMenu = ({
   value,
@@ -25,7 +25,7 @@ export const ListMenu = ({
           id="demo-simple-select"
           value={value}
           label="expansion candidates"
-          onChange={handleChange}
+          onChange={handleChange as unknown as (event:SelectChangeEvent<number>)=>void}
         >
           <MenuItem value={-1}>Best Candidate</MenuItem>
           {Array.from({ length: optionsLength }, (_, i) => (
