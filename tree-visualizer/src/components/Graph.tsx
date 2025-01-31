@@ -110,7 +110,7 @@ const Graph = ({
     [nodes, data]
   );
 
-  const onSearchChange = useCallback((e) => {
+  const onSearchChange = useCallback((e:{target:{value:any}}) => {
     setSearchQuery(() => e.target.value);
   }, []);
 
