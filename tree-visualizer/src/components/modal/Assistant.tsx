@@ -62,10 +62,10 @@ export const AssistantModal = ({
     [entity, _onAction]
   );
 
-  const onSearchActionChange = React.useCallback((e: {taget:{value:number}}) => {
+  const onSearchActionChange = React.useCallback((e: {target:{value:number}}) => {
     setActionQuery(e.target?.value);
   }, []);
-  const onSearchContentChange = React.useCallback((e:  {taget:{value:number}}) => {
+  const onSearchContentChange = React.useCallback((e:  {target:{value:number}}) => {
     setContentQuery(e.target?.value);
   }, []);
 
