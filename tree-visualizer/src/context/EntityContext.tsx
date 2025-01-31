@@ -2,7 +2,7 @@
 import { StringAnyMap } from "@/components/types";
 import { createContext, ReactElement, useContext, useState } from "react";
 
-const EntityContext = createContext(null);
+const EntityContext = createContext<StringAnyMap | null>(null);
 
 export function EntityProvider({
   children,
