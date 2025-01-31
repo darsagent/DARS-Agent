@@ -53,7 +53,7 @@ jobs:
         with:
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
-          cache-dependency-path: ./tree-visualisation/yarn.lock
+          cache-dependency-path: ./tree-visualizer/yarn.lock
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
@@ -73,10 +73,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
-        working-directory: ./tree-visualisation
+        working-directory: ./tree-visualizer
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
-        working-directory: ./tree-visualisation
+        working-directory: ./tree-visualizer
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
