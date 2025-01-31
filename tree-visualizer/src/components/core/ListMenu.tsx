@@ -11,7 +11,7 @@ export const ListMenu = ({
   optionsLength,
 }: {
   value: number;
-  handleChange: (e: SelectChangeEvent) => void;
+  handleChange: (e: { target: { value: number } }) => void;
   optionsLength: number;
 }) => {
   return (
