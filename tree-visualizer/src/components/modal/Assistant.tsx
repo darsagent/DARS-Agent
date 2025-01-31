@@ -62,10 +62,10 @@ export const AssistantModal = ({
     [entity, _onAction]
   );
 
-  const onSearchActionChange = React.useCallback((e: React.ChangeEvent) => {
+  const onSearchActionChange = React.useCallback((e: {taget:{value:number}}) => {
     setActionQuery(e.target?.value);
   }, []);
-  const onSearchContentChange = React.useCallback((e: React.ChangeEvent) => {
+  const onSearchContentChange = React.useCallback((e:  {taget:{value:number}}) => {
     setContentQuery(e.target?.value);
   }, []);
 
@@ -113,7 +113,7 @@ export const AssistantModal = ({
             <div>
               <SearchBar
                 placeholder="search actions"
-                onChange={onSearchActionChange}
+                onChange={onSearchActionChange as unknown as React.ChangeEventHandler}
               />
             </div>
           </div>
