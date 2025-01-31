@@ -35,9 +35,12 @@ export const ProblemStatementModal = ({
     [entity, _onAction]
   );
 
-  const onSearchChange = React.useCallback((e: React.ChangeEvent) => {
-    setQuery(e.target?.value);
-  }, []);
+  const onSearchChange = React.useCallback(
+    (e: { target: { value: string } }) => {
+      setQuery(e.target?.value);
+    },
+    []
+  );
 
   return (
     <Modal
@@ -58,7 +61,9 @@ export const ProblemStatementModal = ({
               <div className="flex items-center gap-1 pr-2">
                 <SearchBar
                   placeholder="search content"
-                  onChange={onSearchChange}
+                  onChange={
+                    onSearchChange as unknown as React.ChangeEventHandler
+                  }
                 />
               </div>
             </div>
