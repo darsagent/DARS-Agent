@@ -54,12 +54,18 @@ export const UserModal = ({
     [entity, _onAction]
   );
 
-  const onSearchActionChange = React.useCallback((e: React.ChangeEvent) => {
-    setActionQuery(e.target?.value);
-  }, []);
-  const onSearchContentChange = React.useCallback((e: React.ChangeEvent) => {
-    setContentQuery(e.target?.value);
-  }, []);
+  const onSearchActionChange = React.useCallback(
+    (e: { target: { value: string } }) => {
+      setActionQuery(e.target?.value);
+    },
+    []
+  );
+  const onSearchContentChange = React.useCallback(
+    (e: { target: { value: string } }) => {
+      setContentQuery(e.target?.value);
+    },
+    []
+  );
 
   return (
     <Modal
@@ -82,7 +88,9 @@ export const UserModal = ({
             <div>
               <SearchBar
                 placeholder="search actions"
-                onChange={onSearchActionChange}
+                onChange={
+                  onSearchActionChange as unknown as React.ChangeEventHandler
+                }
               />
             </div>
           </div>
@@ -112,7 +120,9 @@ export const UserModal = ({
               <div className="pr-2">
                 <SearchBar
                   placeholder="search content"
-                  onChange={onSearchContentChange}
+                  onChange={
+                    onSearchContentChange as unknown as React.ChangeEventHandler
+                  }
                 />
               </div>
             </div>
