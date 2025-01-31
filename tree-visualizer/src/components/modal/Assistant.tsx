@@ -36,7 +36,7 @@ export const AssistantModal = ({
   const [searchContentQuery, setContentQuery] = React.useState<
     string | undefined
   >();
-  const [candidateValue, setCandidateValue] = React.useState<number>(-1);
+  const [candidateValue, setCandidateValue] = React.useState<string>("" + -1);
   const [candidateAction, setCandidateAction] = React.useState<string>(
     entity?.action
   );
@@ -62,25 +62,31 @@ export const AssistantModal = ({
     [entity, _onAction]
   );
 
-  const onSearchActionChange = React.useCallback((e: {target:{value:number}}) => {
-    setActionQuery(e.target?.value);
-  }, []);
-  const onSearchContentChange = React.useCallback((e:  {target:{value:number}}) => {
-    setContentQuery(e.target?.value);
-  }, []);
+  const onSearchActionChange = React.useCallback(
+    (e: { target: { value: string } }) => {
+      setActionQuery(e.target?.value);
+    },
+    []
+  );
+  const onSearchContentChange = React.useCallback(
+    (e: { target: { value: string } }) => {
+      setContentQuery(e.target?.value);
+    },
+    []
+  );
 
   const expansionCandidates = entity?.expansionCandidates;
   const numCandidates = expansionCandidates?.length;
 
   const handleCandidateChange = React.useCallback(
-    (event) => {
+    (event: { target: { value: string } }) => {
       if (!numCandidates) {
         return;
       }
 
-      if (event.target.value == -1) {
+      if (event.target.value == "-1") {
         setCandidateAction(entity?.action);
-        setCandidateValue(-1);
+        setCandidateValue("" + -1);
         setCandidateThought(entity?.content);
       } else {
         const action = expansionCandidates[event.target.value][1];
@@ -113,7 +119,9 @@ export const AssistantModal = ({
             <div>
               <SearchBar
                 placeholder="search actions"
-                onChange={onSearchActionChange as unknown as React.ChangeEventHandler}
+                onChange={
+                  onSearchActionChange as unknown as React.ChangeEventHandler
+                }
               />
             </div>
           </div>
@@ -150,7 +158,9 @@ export const AssistantModal = ({
                 ) : null}
                 <SearchBar
                   placeholder="search content"
-                  onChange={onSearchContentChange}
+                  onChange={
+                    onSearchContentChange as unknown as React.ChangeEventHandler
+                  }
                 />
               </div>
             </div>
