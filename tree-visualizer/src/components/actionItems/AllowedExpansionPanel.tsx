@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { Panel } from "@xyflow/react";
 import { Divider } from "@mui/material";
+import { useCombination } from "@/context/EntityContext";
 
 enum EXPANSION_TYPES {
   EDIT = "edit",
@@ -11,25 +11,18 @@ enum EXPANSION_TYPES {
 }
 
 export const AllowedExpansionPanel = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const defaultCombination = "append_create_edit_submit";
-  const initialCombination =
-    searchParams.get("combination") || defaultCombination;
-
-  // State to track user selection
-  const [expansionCombination, setExpCombination] =
-    useState(initialCombination);
+  const {
+    combination: expansionCombination,
+    setCombination: setExpCombination,
+  } = useCombination();
 
   // Load state from localStorage on mount
   useEffect(() => {
     const savedCombination = localStorage.getItem("selectedCombination");
     if (savedCombination) {
       setExpCombination(savedCombination);
-      router.replace(`/?combination=${savedCombination}`, { scroll: false });
     }
-  }, [router]);
+  }, []);
 
   const updateCombination = (direction: string) => {
     const combinationsState = new Set(
@@ -47,9 +40,6 @@ export const AllowedExpansionPanel = () => {
 
     // Save to localStorage
     localStorage.setItem("selectedCombination", newCombination);
-
-    // Update URL without refreshing
-    router.replace(`/?combination=${newCombination}`, { scroll: false });
   };
 
   return (
