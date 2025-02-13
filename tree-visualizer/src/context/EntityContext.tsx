@@ -11,9 +11,8 @@ export function EntityProvider({
   children: ReactElement;
   data: StringAnyMap | null;
 }) {
-  const [entities] = useState(data);
   return (
-    <EntityContext.Provider value={entities}>{children}</EntityContext.Provider>
+    <EntityContext.Provider value={data}>{children}</EntityContext.Provider>
   );
 }
 
