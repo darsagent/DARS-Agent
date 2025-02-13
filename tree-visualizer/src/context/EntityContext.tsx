@@ -1,6 +1,6 @@
 "use client";
 import { StringAnyMap } from "@/components/types";
-import { createContext, ReactElement, useContext, useState } from "react";
+import { createContext, ReactElement, useContext } from "react";
 
 const EntityContext = createContext<StringAnyMap | null>(null);
 
