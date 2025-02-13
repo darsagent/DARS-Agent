@@ -8,6 +8,9 @@ import { getFlattenedData } from "@/dataHelper/getFlattenedData";
 //Styles
 import "@xyflow/react/dist/style.css";
 
+//Types
+import { StringAnyMap } from "@/components/types";
+
 const COMBINATIONS = [
   "append",
   "append_create",
@@ -41,7 +44,7 @@ export default async function Home() {
   // Convert the array to an object
   const combinationDataMap = combinationVsDataArray.reduce(
     (
-      acc: { [key: string]: { data: any; graphInfo: any } },
+      acc: { [key: string]: { data: StringAnyMap; graphInfo: StringAnyMap } },
       { combination, data, graphInfo }
     ) => {
       acc[combination] = { data, graphInfo };
