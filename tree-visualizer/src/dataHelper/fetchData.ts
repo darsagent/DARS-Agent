@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import { config } from "dotenv";
+import path from "path";
 
 //types
 import { StringAnyMap } from "@/components/types";
@@ -19,16 +20,21 @@ export async function readFile(
   }
 }
 
-export async function fetchData(): Promise<StringAnyMap> {
+export async function fetchData(combination: string): Promise<StringAnyMap> {
   try {
     //path from env file
-    const inputFilePath = process.env.ROOT_INPUT_FILE;
-    if (!inputFilePath)
-      throw new Error("ROOT_INPUT_FILE is not defined in .env");
     const evalFilePath = process.env.JSON_EVAL_FILE;
     if (!evalFilePath) throw new Error("JSON_EVAL_FILE is not defined in .env");
+    const inputFolderPath = process.env.ROOT_INPUT_FOLDER;
+    if (!inputFolderPath)
+      throw new Error("ROOT_INPUT_FOLDER is not defined in .env");
 
-    const inputData = await readFile(inputFilePath);
+    const filePath = path.join(
+      inputFolderPath,
+      `/${combination.length ? combination : "none"}.prev.root`
+    );
+
+    const inputData = await readFile(filePath);
     const evalResults = await readFile(evalFilePath);
 
     return { inputData, evalResults }; // Return the parsed JSON object
