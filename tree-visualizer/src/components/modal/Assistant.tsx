@@ -107,7 +107,10 @@ export const AssistantModal = ({
       isRootNode={!entity?.parentId}
       isEndNode={!entity?.childrenIds?.length}
     >
-      <div className="flex justify-between" style={{ height: "600px" }}>
+      <div
+        className="flex justify-center bg-gray-100 w-full"
+        style={{ height: "600px" }}
+      >
         <div
           className="flex flex-col pb-8 bg-gray-100 no-scrollbar overflow-scroll"
           style={{ width: "500px" }}
