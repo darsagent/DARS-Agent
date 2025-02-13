@@ -81,7 +81,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./tree-visualizer/out
+          path: ./tree-visualizer/.next
 
   # Deployment job
   deploy:
