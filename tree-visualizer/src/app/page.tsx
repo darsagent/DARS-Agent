@@ -1,9 +1,6 @@
 //Components
 import { Graph } from "@/components/Graph";
 
-//Provider
-import { EntityProvider } from "@/context/EntityContext";
-
 //helpers
 import { fetchData } from "@/dataHelper/fetchData";
 import { getFlattenedData } from "@/dataHelper/getFlattenedData";
@@ -11,27 +8,51 @@ import { getFlattenedData } from "@/dataHelper/getFlattenedData";
 //Styles
 import "@xyflow/react/dist/style.css";
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | undefined }>;
-}) {
-  //get the combination from the query params
-  const params = await searchParams;
+const COMBINATIONS = [
+  "append",
+  "append_create",
+  "append_edit",
+  "append_submit",
+  "append_create_edit",
+  "append_create_submit",
+  "append_edit_submit",
+  "append_create_edit_submit",
+  "create",
+  "create_edit",
+  "create_submit",
+  "create_edit_submit",
+  "edit",
+  "edit_submit",
+  "submit",
+  "none",
+];
+export default async function Home() {
+  // staticalyy generated site so generating all possible combinations data
 
-  // Get the combination from the query params, defaulting if not present
-  const combination = params.combination ?? "append_create_edit_submit";
+  // Fetch data for all combinations parelley
+  const combinationVsDataArray = await Promise.all(
+    COMBINATIONS.map(async (combination) => {
+      const data = await fetchData(combination);
+      const { adaptedData, graphInfo } = getFlattenedData(data);
+      return { combination, data: adaptedData, graphInfo };
+    })
+  );
 
-  //server side data fetching
-  const data = await fetchData(combination);
-
-  const { adaptedData, graphInfo } = getFlattenedData(data);
+  // Convert the array to an object
+  const combinationDataMap = combinationVsDataArray.reduce(
+    (
+      acc: { [key: string]: { data: any; graphInfo: any } },
+      { combination, data, graphInfo }
+    ) => {
+      acc[combination] = { data, graphInfo };
+      return acc;
+    },
+    {}
+  );
 
   return (
-    <EntityProvider data={adaptedData}>
-      <div className="flex items-center justify-center">
-        <Graph data={adaptedData} graphInfo={graphInfo} />
-      </div>
-    </EntityProvider>
+    <div className="flex items-center justify-center">
+      <Graph data={combinationDataMap} />
+    </div>
   );
 }
