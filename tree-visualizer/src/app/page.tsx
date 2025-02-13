@@ -11,9 +11,14 @@ import { getFlattenedData } from "@/dataHelper/getFlattenedData";
 //Styles
 import "@xyflow/react/dist/style.css";
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: Readonly<{ searchParams: { combination?: string } }>) {
+  //get the combination from the query params
+  const combination = searchParams.combination ?? "append_create_edit_submit";
+
   //server side data fetching
-  const data = await fetchData();
+  const data = await fetchData(combination);
 
   const { adaptedData, graphInfo } = getFlattenedData(data);
 
