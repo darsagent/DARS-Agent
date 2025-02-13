@@ -13,9 +13,14 @@ import "@xyflow/react/dist/style.css";
 
 export default async function Home({
   searchParams,
-}: Readonly<{ searchParams: { combination?: string } }>) {
+}: {
+  searchParams: Promise<{ [key: string]: string | undefined }>;
+}) {
   //get the combination from the query params
-  const combination = searchParams.combination ?? "append_create_edit_submit";
+  const params = await searchParams;
+
+  // Get the combination from the query params, defaulting if not present
+  const combination = params.combination ?? "append_create_edit_submit";
 
   //server side data fetching
   const data = await fetchData(combination);
