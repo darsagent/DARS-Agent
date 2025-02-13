@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 
 //Components
 import {
@@ -13,13 +13,14 @@ import {
   useNodesState,
   useEdgesState,
   ReactFlowInstance,
-  Panel,
 } from "@xyflow/react";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import ClearIcon from "@mui/icons-material/Clear";
 import SearchIcon from "@mui/icons-material/Search";
-import InfoIcon from "@mui/icons-material/Info";
+import { GoToTopPanel } from "./actionItems/GoToTopPanel";
+import { InfoPanel } from "./actionItems/InfoPanel";
+import { AllowedExpansionPanel } from "./actionItems/AllowedExpansionPanel";
 
 //Providers
 import { ThemeProvider } from "styled-components";
@@ -39,7 +40,7 @@ import "@xyflow/react/dist/style.css";
 import { lightTheme, darkTheme } from "@/components/styles";
 import { StringAnyMap } from "./types";
 import { createNodesAndEdges } from "./utils/createNodesAndEdges";
-import { Divider, Tooltip } from "@mui/material";
+import { Divider } from "@mui/material";
 
 const nodeColor = (node: Node) => {
   switch (node.type) {
@@ -70,8 +71,15 @@ const Graph = ({
     data,
   });
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, ,] = useEdgesState(initialEdges);
-
+  const [edges, setEdges,] = useEdgesState(initialEdges);
+  
+  // 🔄 Update nodes & edges when new data comes in
+  useEffect(() => {
+    const { nodes: newNodes, edges: newEdges } = createNodesAndEdges({ data });
+    setNodes(newNodes);
+    setEdges(newEdges);
+  }, [data]);
+  
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const getHighlightedNodes = useCallback(
@@ -158,46 +166,9 @@ const Graph = ({
         </ControlsStyled>
         <MiniMapStyled nodeColor={nodeColor} zoomable pannable />
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
-        <Panel position="top-left">
-          <div className="flex flex-col gap-3  p-4 bg-white border rounded-xl shadow-xl">
-            <div className="flex gap-4">
-              <div className="flex gap-1 items-center">
-                <Tooltip title="Green + Red Leaf Nodes">
-                  <InfoIcon sx={{ fontSize: 15 }} />
-                </Tooltip>
-                Total Patches Submitted:
-              </div>
-              <div>{graphInfo.patchesCount}</div>
-            </div>
-            <div className="flex gap-4">
-              <div className="flex gap-1 items-center">
-                <Tooltip title="Number of Branches">
-                  <InfoIcon sx={{ fontSize: 18 }} />
-                </Tooltip>
-                Total Paths Explored:
-              </div>
-              <div>{graphInfo.pathCount}</div>
-            </div>
-            <div className="flex gap-4">
-              <div className="flex gap-1 items-center">
-                <Tooltip title="Number of Green Leaf Nodes">
-                  <InfoIcon sx={{ fontSize: 15 }} />
-                </Tooltip>
-                Total Accepted Patches:
-              </div>
-              <div>{graphInfo.acceptedPatches}</div>
-            </div>
-            <div className="flex gap-4">
-              <div className="flex gap-1 items-center">
-                <Tooltip title="Number of Assistant Nodes">
-                  <InfoIcon sx={{ fontSize: 15 }} />
-                </Tooltip>
-                Total Iterations:
-              </div>
-              <div>{graphInfo.iterations}</div>
-            </div>
-          </div>
-        </Panel>
+        <InfoPanel graphInfo={graphInfo} />
+        <GoToTopPanel />
+        <AllowedExpansionPanel />
       </ReactFlowStyled>
     </div>
   );
