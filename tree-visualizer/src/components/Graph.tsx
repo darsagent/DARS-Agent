@@ -24,6 +24,7 @@ import { AllowedExpansionPanel } from "./actionItems/AllowedExpansionPanel";
 
 //Providers
 import { ThemeProvider } from "styled-components";
+import { EntityProvider, useCombinationData } from "@/context/EntityContext";
 
 //utils
 import { nodeTypes } from "@/components/nodes";
@@ -56,14 +57,11 @@ const nodeColor = (node: Node) => {
 const Graph = ({
   theme,
   toggleTheme,
-  data,
-  graphInfo,
 }: {
   theme: Theme;
   toggleTheme: () => void;
-  data: StringAnyMap;
-  graphInfo: StringAnyMap;
 }) => {
+  const { data, graphInfo } = useCombinationData() as StringAnyMap;
   const onInit = (reactFlowInstance: ReactFlowInstance) => {
     reactFlowInstance.setViewport({ x: 800, y: 500, zoom: 0.75 }); // Adjust padding for better fit
   };
@@ -174,13 +172,7 @@ const Graph = ({
   );
 };
 
-const GraphContainer = ({
-  data,
-  graphInfo,
-}: {
-  data: StringAnyMap;
-  graphInfo: StringAnyMap;
-}) => {
+const GraphContainer = ({ data }: { data: StringAnyMap }) => {
   const [theme, setTheme] = useState<Theme>(Theme.LIGHT);
 
   const toggleTheme = useCallback(() => {
@@ -188,12 +180,9 @@ const GraphContainer = ({
   }, []);
   return (
     <ThemeProvider theme={theme === Theme.LIGHT ? lightTheme : darkTheme}>
-      <Graph
-        data={data}
-        graphInfo={graphInfo}
-        theme={theme}
-        toggleTheme={toggleTheme}
-      />
+      <EntityProvider data={data}>
+        <Graph theme={theme} toggleTheme={toggleTheme} />
+      </EntityProvider>
     </ThemeProvider>
   );
 };
