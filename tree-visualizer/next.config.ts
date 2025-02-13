@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: true,
-  output: "export", // Ensures Next.js exports static files
+  // output: "export", // Ensures Next.js exports static files
   images: {
     unoptimized: true, // Required for GitHub Pages
   },
