@@ -78,7 +78,7 @@ export const UserModal = ({
     >
       <div
         className="flex justify-center bg-gray-100 w-full"
-        style={{ height: "500px" }}
+        style={{ height: "600px" }}
       >
         <div className="flex flex-col pb-8 bg-gray-100 no-scrollbar overflow-scroll">
           <div className="flex px-4 items-center justify-between sticky top-0 bg-gray-100 py-2 ">
