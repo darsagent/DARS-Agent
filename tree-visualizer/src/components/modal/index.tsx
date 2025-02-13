@@ -27,7 +27,6 @@ export const Modal = ({
 }) => {
   const entity = useEntity(entityId) as StringAnyMap | null;
 
-  console.log(entityId, entity);
   if (!entity) return null;
 
   switch (entity.role) {
