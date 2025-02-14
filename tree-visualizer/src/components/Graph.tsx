@@ -14,8 +14,8 @@ import {
   useEdgesState,
   ReactFlowInstance,
 } from "@xyflow/react";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import LightModeIcon from "@mui/icons-material/LightMode";
+// import DarkModeIcon from "@mui/icons-material/DarkMode";
+// import LightModeIcon from "@mui/icons-material/LightMode";
 import ClearIcon from "@mui/icons-material/Clear";
 import SearchIcon from "@mui/icons-material/Search";
 import { GoToTopPanel } from "./actionItems/GoToTopPanel";
