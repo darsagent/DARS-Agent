@@ -92,7 +92,11 @@ const Graph = ({
             },
           };
 
-        const { entityId } = node?.data?.additional as StringAnyMap;
+        const additional = node?.data?.additional as StringAnyMap;
+        const entityId = additional?.entityId;
+
+        // check for transition nodes
+        if (!entityId) return node;
 
         if (checkQueryInText(data[entityId]?.content, query)) {
           return {
@@ -133,12 +137,12 @@ const Graph = ({
         fitView
       >
         <ControlsStyled position="top-center" orientation="horizontal">
-          <button
+{/*           <button
             onClick={toggleTheme}
             className="bg-sky-900 dark:bg-mint-500 !important"
           >
             {theme == Theme.DARK ? <LightModeIcon /> : <DarkModeIcon />}
-          </button>
+          </button> */}
           <Divider orientation="vertical" flexItem />
           <input
             className="px-4"
