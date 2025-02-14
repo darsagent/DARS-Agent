@@ -54,10 +54,7 @@ const nodeColor = (node: Node) => {
   }
 };
 
-const Graph = ({
-  theme,
-  toggleTheme,
-}: {
+const Graph = ({}: {
   theme: Theme;
   toggleTheme: () => void;
 }) => {
