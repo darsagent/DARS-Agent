@@ -45,7 +45,7 @@ export const AllowedExpansionPanel = () => {
   return (
     <Panel position="top-right">
       <div className="flex flex-col gap-1  pt-2 px-2 bg-white border rounded-xl shadow-xl">
-        <div className="pt-1 px-2 font-bold">Allowed expansions</div>
+        <div className="pt-1 px-2 font-bold">View expansions</div>
         <Divider flexItem />
         <div className="grid grid-cols-2 py-2 gap-1">
           <button
