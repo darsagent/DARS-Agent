@@ -9,5 +9,5 @@ export const GoToTopPanel=()=>{
     },[]);
 
     return (<Panel position="bottom-left"><button className="p-4 bg-white border border-gray-300 hover:bg-indigo-100 rounded-3xl shadow-2xl" onClick={goToTopNode}>
-        Go To Top</button></Panel>)
+        Reset View</button></Panel>)
 }
