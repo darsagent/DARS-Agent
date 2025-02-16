@@ -49,7 +49,7 @@ export const AllowedExpansionPanel = () => {
     <Panel position="top-right">
       <div className="flex flex-col gap-1  pt-2 px-2 bg-white border rounded-xl shadow-xl">
         <div className="pt-1 px-2 font-bold flex gap-1 justify-center">
-          ALLOWED EXPANSIONS
+          VIEW EXPANSIONS
           <Tooltip title="Considers following actions for expansion">
             <InfoIcon sx={{ fontSize: 15 }} />
           </Tooltip>
