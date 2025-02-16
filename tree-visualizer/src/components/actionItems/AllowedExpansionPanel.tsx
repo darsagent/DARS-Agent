@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import { Panel } from "@xyflow/react";
 import { Divider } from "@mui/material";
 import { useCombination } from "@/context/EntityContext";
+import Switch from "@mui/material/Switch";
+import InfoIcon from "@mui/icons-material/Info";
+import { Tooltip } from "@mui/material";
 
 enum EXPANSION_TYPES {
   EDIT = "edit",
@@ -45,49 +48,44 @@ export const AllowedExpansionPanel = () => {
   return (
     <Panel position="top-right">
       <div className="flex flex-col gap-1  pt-2 px-2 bg-white border rounded-xl shadow-xl">
-        <div className="pt-1 px-2 font-bold">View expansions</div>
+        <div className="pt-1 px-2 font-bold flex gap-1 justify-center">
+          ALLOWED EXPANSIONS
+          <Tooltip title="Considers following actions for expansion">
+            <InfoIcon sx={{ fontSize: 15 }} />
+          </Tooltip>
+        </div>
         <Divider flexItem />
-        <div className="grid grid-cols-2 py-2 gap-1">
-          <button
-            className={`border-2 py-2 rounded-md border-double ${
-              expansionCombination.includes(EXPANSION_TYPES.APPEND)
-                ? "bg-blue-600 text-white hover:bg-blue-500"
-                : "bg-gray-300 hover:bg-gray-200"
-            }`}
-            onClick={() => updateCombination(EXPANSION_TYPES.APPEND)}
-          >
-            append
-          </button>
-          <button
-            className={`border-2 py-2 rounded-md border-double ${
-              expansionCombination.includes(EXPANSION_TYPES.CREATE)
-                ? "bg-blue-600 text-white hover:bg-blue-500"
-                : "bg-gray-300 hover:bg-gray-200"
-            }`}
-            onClick={() => updateCombination(EXPANSION_TYPES.CREATE)}
-          >
-            create
-          </button>
-          <button
-            className={`border-2 py-2 rounded-md border-double ${
-              expansionCombination.includes(EXPANSION_TYPES.EDIT)
-                ? "bg-blue-600 text-white hover:bg-blue-500"
-                : "bg-gray-300 hover:bg-gray-200"
-            }`}
-            onClick={() => updateCombination(EXPANSION_TYPES.EDIT)}
-          >
-            edit
-          </button>
-          <button
-            className={`border-2 py-2 rounded-md border-double ${
-              expansionCombination.includes(EXPANSION_TYPES.SUBMIT)
-                ? "bg-blue-600 text-white hover:bg-blue-500"
-                : "bg-gray-300 hover:bg-gray-200"
-            }`}
-            onClick={() => updateCombination(EXPANSION_TYPES.SUBMIT)}
-          >
-            submit
-          </button>
+        <div className="grid grid-cols-2 pb-2 gap-1">
+          <div className="flex justify-between items-center">
+            Append
+            <Switch
+              checked={expansionCombination.includes(EXPANSION_TYPES.APPEND)}
+              onChange={() => updateCombination(EXPANSION_TYPES.APPEND)}
+            />
+          </div>
+
+          <div className="flex justify-between items-center">
+            Create
+            <Switch
+              checked={expansionCombination.includes(EXPANSION_TYPES.CREATE)}
+              onChange={() => updateCombination(EXPANSION_TYPES.CREATE)}
+            />
+          </div>
+
+          <div className="flex justify-between items-center">
+            Edit
+            <Switch
+              checked={expansionCombination.includes(EXPANSION_TYPES.EDIT)}
+              onChange={() => updateCombination(EXPANSION_TYPES.EDIT)}
+            />
+          </div>
+          <div className="flex justify-between items-center">
+            Submit
+            <Switch
+              checked={expansionCombination.includes(EXPANSION_TYPES.SUBMIT)}
+              onChange={() => updateCombination(EXPANSION_TYPES.SUBMIT)}
+            />
+          </div>
         </div>
       </div>
     </Panel>
