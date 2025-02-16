@@ -76,6 +76,15 @@ const Graph = ({}: {
   }, [data]);
   
   const [searchQuery, setSearchQuery] = useState<string>("");
+  
+  const onSearchKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Enter") {
+        setNodes(getHighlightedNodes(searchQuery));
+      }
+    },
+    [searchQuery, getHighlightedNodes, setNodes]
+  );
 
   const getHighlightedNodes = useCallback(
     (query: string): Node[] => {
@@ -146,6 +155,7 @@ const Graph = ({}: {
             value={searchQuery}
             placeholder="search globally"
             onChange={onSearchChange}
+            onKeyDown={onSearchKeyDown}
           />
           <button
             onClick={() => {
