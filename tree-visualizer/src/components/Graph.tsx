@@ -76,15 +76,6 @@ const Graph = ({}: {
   }, [data]);
   
   const [searchQuery, setSearchQuery] = useState<string>("");
-  
-  const onSearchKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === "Enter") {
-        setNodes(getHighlightedNodes(searchQuery));
-      }
-    },
-    [searchQuery, getHighlightedNodes, setNodes]
-  );
 
   const getHighlightedNodes = useCallback(
     (query: string): Node[] => {
@@ -129,6 +120,14 @@ const Graph = ({}: {
   const onSearchChange = useCallback((e:{target:{value:string}}) => {
     setSearchQuery(() => e.target.value);
   }, []);
+  const onSearchKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Enter") {
+        setNodes(getHighlightedNodes(searchQuery));
+      }
+    },
+    [searchQuery, getHighlightedNodes, setNodes]
+  );
 
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
