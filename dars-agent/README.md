@@ -3,10 +3,11 @@
 </p>
 <p align="center">
   <a href="https://drive.google.com/file/d/1DMAZ-fkirC8uKl8819cOq9J3BQ4E7GXR/view?usp=sharing">
-    <img src="https://img.shields.io/badge/Paper%20on%20ArXiv-%23299dc2?style=for-the-badge&logo=readthedocs&logoColor=%23334455" alt="Paper">
+    <img src="https://img.shields.io/badge/Paper-%23299dc2?style=for-the-badge&logo=readthedocs&logoColor=%23334455" alt="Paper">
   </a>
 </p>
 <h1 align="center">DARS: Dynamic Action Re-Sampling to Enhance Coding Agent Performance by Adaptive Tree Traversal</h1>
+
 
 ![Figure](assets/figure.svg)
 
