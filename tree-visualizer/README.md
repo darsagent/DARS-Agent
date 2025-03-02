@@ -16,7 +16,6 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the page like this.
 
-![main-page](assets/images/tree-visualizer.png)
 
 
 ## Configuration(.env file)
