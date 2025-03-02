@@ -29,7 +29,5 @@ JSON_EVAL_FILE: The final evaluation file generated after running the model, rep
 ROOT_INPUT_FOLDER: Contains all 16 possible .root files, each representing different trajectory cases: ["Append", "Create", "Edit", "Submit"].
 ```
 
-## Features
-
 
 
