@@ -1,3 +1,5 @@
+#!/root/miniconda3/envs/aider/bin/python
+
 import colorsys
 import argparse
 import os

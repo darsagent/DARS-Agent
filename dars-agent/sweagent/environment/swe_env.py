@@ -423,6 +423,7 @@ class SWEEnv(gym.Env):
                                                      timeout_duration=LONG_TIMEOUT)
         # resolve the issue of incompatible version for tree-sitter
         self.communicate_with_handling('pip install tree-sitter==0.20.4', error_msg="Failed to install downgrade tree-sitter.\n")
+        self.communicate_with_handling('chmod +x /root/construct_graph.py', error_msg="Failed to make construct graph file executable.\n")
         self.logger.info('Constructing code graph...')
 
         base_path = "/root/persistent_data" if self.args.persistent_volume else ""
@@ -430,7 +431,7 @@ class SWEEnv(gym.Env):
         self.logger.info(f'Code graph path: {code_graph_path}')
 
         response = self.communicate_with_handling(
-            input=f"python3 /root/construct_graph.py --repo_dir {self._repo_name} --output_dir {code_graph_path}",
+            input=f"/root/construct_graph.py --repo_dir {self._repo_name} --output_dir {code_graph_path}",
             error_msg="Failed to initialize code graph\n",
             timeout_duration=LONG_TIMEOUT,
         )

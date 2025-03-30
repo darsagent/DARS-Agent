@@ -335,6 +335,11 @@ class LiteLLMCacheModel(AbstractModelBase):
             "cost_per_input_token": 2.5e-06,
             "cost_per_output_token": 1e-05,
         },
+        "hosted_vllm/Qwen/Qwen2.5-Coder-32B-Instruct": {
+            "max_context": 32_000,
+            "cost_per_input_token": 2.5e-06,
+            "cost_per_output_token": 1e-05,
+        },
     }
 
     SHORTCUTS = {
@@ -344,6 +349,7 @@ class LiteLLMCacheModel(AbstractModelBase):
         "claude-3-5-sonnet-20241022": "claude-3-5-sonnet-20241022",
         "claude-3-5-haiku-20241022": "claude-3-5-haiku-20241022",
         "azure/gpt-4o": "azure/gpt-4o",
+        "qwen-2.5-coder": "hosted_vllm/Qwen/Qwen2.5-Coder-32B-Instruct"
     }
 
     def __init__(self, args: ModelArguments, commands: List[Any]):
@@ -407,6 +413,7 @@ class LiteLLMCacheModel(AbstractModelBase):
                 "messages": messages,
                 "temperature": temperature if temperature is not None else self.args.temperature,
                 "top_p": self.args.top_p,
+                "api_base": keys_config.get("LITELLM_API_BASE", ""),
             }
 
             response = completion(**model_params)

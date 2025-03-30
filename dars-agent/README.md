@@ -52,8 +52,10 @@ chmod +x repograph/setup_repograph.sh
 
 **5. Install Docker and Pull the Image:** The agent uses a sandboxed environment to run the code. To install Docker, follow the instructions [here](https://docs.docker.com/get-docker/). Then pull the SWE-Agent Docker image and change the permissions of the Docker socket by running the following commands:
 ```bash
-docker pull sweagent/swe-agent:latest
 sudo chmod 666 /var/run/docker.sock
+docker pull sweagent/swe-agent:latest
+chmod +x ./setup.sh
+./setup.sh
 ```
 
 **6. Run the agent:** To run the agent on SWE-Bench Lite, use the following command:
