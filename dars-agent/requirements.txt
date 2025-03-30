@@ -26,3 +26,4 @@ google-generativeai
 langchain-voyageai
 litellm
 grep_ast
+hydra-core
